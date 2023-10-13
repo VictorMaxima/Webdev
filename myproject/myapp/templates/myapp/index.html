@@ -1,0 +1,7 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<h1>You remembered<h1/>
+{%for book in books%}
+<span class="card-title" color="blue" >{{book}}<br></span>
+{%endfor%}
+{% endblock %}
