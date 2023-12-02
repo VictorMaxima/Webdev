@@ -1,0 +1,116 @@
+{% extends 'SchoolApp/base.html' %}
+{% block content %}
+<section data-bs-version="5.1" class="form4 cid-tX7IlZdyP2 mbr-fullscreen" id="form4-1m">
+    <div class="container">
+        <div class="row content-wrapper justify-content-center">
+            <div class="col-lg-3 offset-lg-1 mbr-form">
+                <form method="POST" class="mbr-form form-with-styler d-print-none " data-verified="">
+                    {% csrf_token%}
+                    <div class="row">                        
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                            Oops...! some problem!
+                        </div>
+                    </div>
+                    <div class="dragArea row">
+                        <div class="col-lg-12 col-md-12 col-sm-7">
+                            <h1 class="mbr-section-title mb-4 display-2">
+                                <strong>Result</strong>
+                            </h1>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                                Choose the term and the session to check result</p>
+                        </div>
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="name">
+                            <select name="term" value="{{form.term.value| default:"" }}" class="form-control">
+                                <option>FIRST TERM</option>
+                                <option>SECOND TERM</option>
+                                <option>THIRD TERM</option>
+                                {{form.errors}}
+                            </select>   
+                        </div>
+                        <div class="col-lg-12 col-md col-12 form-group mb-3" data-for="email">
+                            <select name="year" value="{{form.year.value| default:""}}" class="form-control">
+                                {% for session in sessions %}
+                                <option>{{session}}</option>{{form.session.errors}}
+                                
+                                {% endfor %}
+                                {{form.session.errors}}
+                                {{form.errors}}
+                            </select>                    
+                        </div>
+                        <div class="col-12 col-md-auto mbr-section-btn">
+                            <button type="submit" class="btn btn-secondary display-4">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-7 offset-lg-1 col-10">
+                <div class="image-wrapper">
+                    {% if result is not None %}
+                        <div class="d-none d-print-block">
+                            School
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h1 class="row justify-content-center"> Termly Report For {{ student.surname}} {{student.firstname}} {{student.middlename}}</h1>
+                            </div>
+                            <div class="card-body">
+                                <table class="table text-dark ">
+                                    <tr>
+                                        <td>Session : {{result.session}}</td>
+                                            <td>Term: {{result.term}}</td>
+                                        </tr>
+                                </table>
+                                <table class="table text-dark table-striped table-bordered">
+                                    <tr>
+                                        <td>S/N</td>
+                                        <td>Subject</td>
+                                        <td>Assessment</td>
+                                        <td>Exam Score</td>
+                                        <td>Total Score</td>
+                                        <td>Grade</td>
+                                        <td>Teacher</td>
+                                    </tr>
+                                    {% for subject in result.result.all%}
+                                    <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{subject.subject}}</td>
+                                    <td>{{subject.AssessmentScore}}</td>
+                                    <td>{{subject.ExamScore}}</td>
+                                    <td>{{subject.TotalScore}}</td>
+                                    <td>{{subject.Grade}}</td>
+                                    <td>{{subject.teacherInCharge}}
+                                    </tr>
+                                    {%endfor%}
+                                <table class="table">
+                                <tr>
+                                    <td>Average: {{result.average}} </td><td>Postion: {{result.Position}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <dl>
+                                            <dt>Teacher's Remark</dt>
+                                            <dd>{{result.RemarkFromTeacher}}</dd>
+                                        <dl>
+                                    </td>
+                                    <td>
+                                        <dl>
+                                            <dt>Principal's Remark</dt>
+                                            <dd>{{result.RemarkFromPrincipal}}</dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </table>
+                            </div>
+                        </div>
+                        {% else %}
+                        Choose a term and year and click submit
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}

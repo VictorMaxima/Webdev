@@ -1,0 +1,61 @@
+{% extends "SchoolApp/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container mt-5 bg-transparent align-self-center text-dark" style="float: center">
+
+  {% if user.is_authenticated %}
+  <p class="errornote">
+  </p>
+  {% endif %}
+  <div class="row justify-content-center bg-transparent">
+    <div class="col-md-4 bg-transparent align-middle">
+      <div class="card bg-transparent">
+        <div class="card-body text-center hamburger text-dark" >
+          <h2>Student Login</h2>
+        </div>
+        <div class="card-body bg-transparent">
+          <form method="post" id="login-form">{% csrf_token %}
+            <div class="form-group form-row justify-content-center text-dark">
+              {{ form.username.errors }} Registration Number OR Username:
+              
+            <input class="form-control " value="{{form.username.value| default:""}}" name="username">
+            </div>
+            <div class=" form-group form-row justify-content-center text-dark">
+              {{ form.password.errors }}
+              {{form.password.label_tag}}
+              <input class="form-control align-middle" type="password" name="password" value="{{ form.password.value| default:"" }}">
+            </div>
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+            <div class="password-reset-link">
+              <a href="{{ password_reset_url }}"></a>
+            </div>
+            {% endif %}
+            <div class="submit row justify-content-center">
+              <button type="submit" class="btn btn-primary">
+                Login
+              </button>
+            </div>
+            {% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

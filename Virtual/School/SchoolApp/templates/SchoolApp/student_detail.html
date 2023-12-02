@@ -1,0 +1,39 @@
+{%extends "SchoolApp/base.html"%}
+{% block content %}
+    <h1>Student DashBoard</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center bg-transparent">
+            <div class="col-md-4 bg-transparent align-middle">
+                <div class="card row justify-content-center bg-transparent">
+        <img src="{{student.picture.url}}" alt="cover" height="250" class="card row justify-content-center">
+                </div>
+            </div>
+        </div>
+    </div>
+        <table class="table text-dark">
+        <tr>
+            <th>Name</th>
+            <td>{{ student.surname}} {{student.firstname}} {{student.middlename}}</td>
+        </tr>
+        <tr>
+            <th>STATE OF ORIGIN</th>
+            <td>{{student.state_of_origin}}</td>
+        </tr>
+        <tr>
+            <th>DATE OF BIRTH</th>
+            <td>{{student.DateOfBirth}}</td>
+        </tr>
+        <tr>
+            <th>YEAR OF GRADUATION</th>
+            <td>{{student.Set}}</td>
+    </table>
+    <a href="{% url 'result'%}">Check result</a>
+    <div class="submit row justify-content-center">
+        <a href="{% url "logout" %}">
+            <button type="submit" class="btn btn-primary">
+              Logout
+            </button>
+        </a>
+    </div>
+    
+{% endblock%}
