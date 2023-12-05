@@ -9,6 +9,7 @@
  content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <!-- Bootstrap CSS -->
  <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+ <link rel="stylesheet" href="{% static "css/bootstrap"}"
  <link rel="stylesheet" href="{% static "web/assets/mobirise-icons2/mobirise2.css" %}">
   <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
   <link rel="stylesheet" href="{% static "css/bootstrap-grid.min.css"%}" >
@@ -22,7 +23,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="{% static "css/mbr-additional.css" %}"><link rel="stylesheet" href="{% static "css/mbr-additional.css" %}" type="text/css">
 
- <title>BookTime</title>
+ <title>School</title>
  </head>
  <body >
     <section data-bs-version="5.1" class="menu menu2 cid-tJS6tZXiPa d-print-none" once="menu" id="menu02-1i">
@@ -36,16 +37,17 @@
                     </span>
                     <span class="navbar-caption-wrap"><a class="navbar-caption text-black text-primary display-4" href="#">School</a></span>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <div class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                <button class="navbar-toggle navbar-toggle" type="button" data-toggle="collapse" data-bs-toggle="collapse"
+                 data-target="#navbarSupportedContent">
+                    <div class="navbar-header navbar-dropdown">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
+                    <ul class="nav navbar-nav " data-app-modern-menu="true"><li class="nav-item">
                             <a class="nav-link link text-black text-primary display-4" href="#">About</a>
                         </li>
                         <li class="nav-item">
@@ -54,7 +56,8 @@
                         <li class="nav-item">
                             <a class="nav-link link text-black text-primary display-4" href="#">Contacts</a>
                         </li><li class="nav-item"><a class="nav-link link text-black text-primary display-4"{% if user.is_authenticated%}
-                             href="{% url "profile" %}">Student Profile {% else %} href="{% url "login" %}">Student Login{% endif %}</a></li></ul>
+                             href="{% url "profile" %}">Student Profile {% else %} href="{% url "login" %}">Student Login{% endif %}</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -112,12 +115,15 @@
         </div>
     </section>
   <input name="animation" type="hidden">
-<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/popper.min.js" % }"></script>
 <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
 <script src="{% static "smoothscroll/smooth-scroll.js" %}"></script>  
 <script src="{% static "ytplayer/index.js" %}"></script> 
 <script src="{% static "dropdown/js/navbar-dropdown.js"%}"></script> 
-<script src="{% static "theme/js/script.js" %}"></script>  
+<script src="{% static "theme/js/script.js" %}"></script>
+<script src="{% static "js/bootstrap.bundle.js" %}" ></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
   
  </body>
 </html>
