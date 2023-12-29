@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6#y#lwhwo*0e82^_k^qvlw5z$+9@5x5u+=%y^^133vo5vl31u^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["victormaxima.pythonanywhere.com", "127.0.0.1"]
 
 # Application definition
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend', 'SchoolApp.forms.MyBackend']

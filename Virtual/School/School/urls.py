@@ -24,9 +24,12 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('all_news/' ,sch_views.news_list, name='news_list'),
     path('accounts/profile/', sch_views.profile, name='profile'),
     path('accounts/logout/', sch_views.log_out, name="logout"),
     path('accounts/results', sch_views.result, name="result"),
+    path('about', sch_views.about, name='about'),
+    path('news/<slug:slug>/', sch_views.news, name="news"),
     path('login/', auth_views.LoginView.as_view(template_name='SchoolApp/login.html', form_class=forms.AuthenticationForm), name="login"),
     path('', sch_views.home, name="home")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

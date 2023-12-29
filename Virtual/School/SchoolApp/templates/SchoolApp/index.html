@@ -1,4 +1,283 @@
 {% extends 'SchoolApp/base.html' %}
+{% load static%}
 {% block content%}
-<h2>This is the home landing page</h2>
+<section data-bs-version="5.1" class="header5 cid-tYog08RsfP" id="header05-1o">
+	
+
+	
+	
+	<div class="topbg"></div>
+	<div class="align-center container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-md-12 content-head">
+				<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+					<strong>Welcome to School</strong>
+				</h1>
+				<p class="mbr-text mbr-fonts-style mb-4 display-7">
+					We are a school that aims to provide the very best for our students
+				</p>
+			</div>
+		</div>
+		<div class="row mt-5 justify-content-center">
+			<div class="col-12 col-lg-8">
+				<img src="{% static "assets/SchoolBackGround.jpg" %}" alt="SchoolBackGround" title="">
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="people03 cid-tYogWAhYzq" id="people03-1s">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 content-head">
+				<div class="mbr-section-head mb-5">
+					<h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+						<strong>Meet the people in charge</strong></h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img mb-3">
+						<img src="{% static "assets/Principal.jpg" %}" alt="Principal" title="">
+					</div>
+					<div class="item-content align-left">
+						<h5 class="item-title mbr-fonts-style mb-3 display-7">
+							Mr. Obi
+						</h5>
+						<h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+							<strong>Our Principal</strong>
+						</h6>
+						<p class="mbr-text mbr-fonts-style mt-3 display-7">
+							20 may, 20 min
+						</p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img mb-3">
+						<img src="{% static "assets/Dean.jpg" %}" alt="Dean Of Studies" title="">
+					</div>
+					<div class="item-content align-left">
+						<h5 class="item-title mbr-fonts-style mb-3 display-7">
+							Mrs. Scarlet
+						</h5>
+						<h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+							<strong>Our Dean of Studies</strong>
+						</h6>
+						<p class="mbr-text mbr-fonts-style mt-3 display-7">
+							22 may, 18 min
+						</p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="item features-image col-12 col-md-6 col-lg-4">
+				<div class="item-wrapper">
+					<div class="item-img mb-3">
+						<img src="{% static "assets/Proprietress.jpg" %}" alt="The proprietress" title="">
+					</div>
+					<div class="item-content align-left">
+						<h5 class="item-title mbr-fonts-style mb-3 display-7">
+							Mr. &amp Mrs. Uche
+						</h5>
+						<h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+							<strong>Our proprietress</strong>
+						</h6>
+						<p class="mbr-text mbr-fonts-style mt-3 display-7">
+							27 may, 25 min<br>
+						</p>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="header15 cid-tYog6x467f" id="header15-1q">	
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="card col-12 col-lg-10">
+				<div class="card-wrapper wrap">
+					<div class="card-box align-center">
+						<h1 class="card-title mbr-fonts-style mb-4 display-1">
+							<strong>Join our School</strong></h1>
+						<p class="mbr-text mbr-fonts-style mb-4 display-7">Join us now at school to get the best education that you will ever need</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="people01 cid-tYogfb9DbG" id="people01-1r">
+  <div class="container">
+    <div class="row">
+
+      <div class="">{% for Datas in Data%}
+        <div class="item features-without-image">
+          <div class="item-wrapper">
+            <div class="row align-items-center">
+              <div class="col-md-7">
+                <div class="align-left">
+                  <h3 class="mbr-section-title mbr-fonts-style mb-2 display-5"><strong>{{Datas.title}}</strong></h3>
+                  <h4 class="mbr-section-subtitle mbr-fonts-style mb-3 display-7">
+                    {{Datas.excerpt}}
+                  </h4>
+                  <p class="mbr-section-text mbr-fonts-style mb-0 display-7">
+                    Full-time<br>
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="mbr-section-btn align-right">
+                  <a class="btn btn-black display-7" href="{% url "news" Datas.slug %}"><strong>Read
+                      more</strong></a>
+                </div>
+              </div>{%endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-bs-version="5.1" class="people02 cid-tYogYwk5Rx" id="people02-1t">
+	
+
+	
+	
+	<div class="container">
+		<div class="row mb-5 justify-content-center">
+			<div class="col-12 content-head">
+				<h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2">
+					<strong>Testimonials</strong>
+				</h3>
+				<h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-4 display-7">
+					Lorem ipsum dolor sit amet nulla vel, consectetur massa adipiscing.
+				</h5>
+			</div>
+		</div>
+		<div class="row">
+				<div class="item features-without-image col-12 col-md-6 col-lg-4 mb-5">
+					<div class="item-wrapper">
+						<div class="card-box align-center">
+							<div class="iconfont-wrapper mb-3">
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+							</div>
+							<h5 class="card-title mbr-fonts-style mb-3 display-7">
+								Lorem ipsum dolor sit amet nulla vel, consectetur massa adipiscing.
+							</h5>
+							<p class="card-text mbr-fonts-style mb-0 display-7">
+								Jennifer J. Omalley
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="item features-without-image col-12 col-md-6 col-lg-4 mb-5">
+					<div class="item-wrapper">
+						<div class="card-box align-center">
+							<div class="iconfont-wrapper mb-3">
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+							</div>
+							<h5 class="card-title mbr-fonts-style mb-3 display-7">
+								Lorem ipsum dolor sit amet nulla vel, consectetur massa adipiscing.
+							</h5>
+							<p class="card-text mbr-fonts-style mb-0 display-7">
+								Christian T. Jackson
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="item features-without-image col-12 col-md-6 col-lg-4 mb-5">
+					<div class="item-wrapper">
+						<div class="card-box align-center">
+							<div class="iconfont-wrapper mb-3">
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+								<span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
+							</div>
+							<h5 class="card-title mbr-fonts-style mb-3 display-7">
+								Lorem ipsum dolor sit amet nulla vel, consectetur massa adipiscing.
+							</h5>
+							<p class="card-text mbr-fonts-style mb-0 display-7">
+								Connie L. Raymond
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="row mt-0 mt-md-5">
+			<div class="col-12 align-center">
+				<div class="mbr-section-btn">
+					<a class="btn btn-primary display-7" href="https://mobiri.se">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> 
+<section data-bs-version="5.1" class="features15 cid-tLek7gQhG7" id="features015-m">	
+	<div class="container">
+		<div class="mbr-section-head mb-5">
+			<h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+			  <strong>Why us?</strong></h4>
+			
+		  </div>
+		<div class="row justify-content-center">
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop1.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Free</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">well revised curriculum</h5>
+					</div>
+				</div>
+			</div>
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop2.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Easy</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">Affordable and quality</h5>
+					</div>
+				</div>
+			</div>
+			<div class="item features-without-image col-12 col-lg-4">
+				<div class="item-wrapper">
+					<div class="img-wrapper">
+						<img src="assets/images/shop3.jpg" alt="Mobirise Website Builder">
+					</div>
+					<div class="card-box">
+						<h4 class="card-title mbr-fonts-style mb-3 display-5">
+							<strong>Beautiful</strong></h4>
+						<h5 class="card-text mbr-fonts-style display-7">deve</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 {% endblock%}

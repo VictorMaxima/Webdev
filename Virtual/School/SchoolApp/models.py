@@ -3,6 +3,8 @@ from django.contrib import admin
 import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, User
+from django.urls import reverse
+from django.utils.text import slugify
 
 def grade(a):
     if a < 40:
@@ -22,7 +24,7 @@ class Class(models.Model):
     name = models.CharField(max_length=9)
     year_of_graduation = models.IntegerField(default=2023)
     def __str__(self):
-        return self.name
+        return str(self.year_of_graduation)
     
 class Teacher(models.Model):
     pass
@@ -37,7 +39,7 @@ class Student(AbstractBaseUser):
     state_of_origin = models.CharField(max_length=32)
     backend = 'SchoolApp.forms.MyBackend'
     DateOfBirth = models.DateField(default=datetime.datetime.now)
-    Set = models.ForeignKey(Class, on_delete=models.CASCADE)
+    Year_Of_Graduation = models.ForeignKey(Class, on_delete=models.CASCADE)
     
 
     def __str__(self):
@@ -54,6 +56,7 @@ class Student(AbstractBaseUser):
     
 class Session(models.Model):
     title = models.CharField(max_length=9)
+    current = models.BooleanField(default=False)
     def __str__(self):
         return self.title
 
@@ -120,7 +123,7 @@ class StudentResultAdmin(admin.ModelAdmin):
         ResultInline
     ]
 
-class StudentInline(admin.TabularInline):
+class StudentInline(admin.StackedInline):
     model = Student
     show_change_link = True
 
@@ -129,3 +132,31 @@ class SetAdmin(admin.ModelAdmin):
         StudentInline
     ]
     
+class SchoolData(models.Model):
+    title = models.CharField(max_length=45)
+    content = models.TextField()
+    excerpt = models.TextField(default='', editable=False, max_length=500)
+    slug = models.SlugField(blank=True, default='')
+    def __str__(self):
+        return self.title
+    
+    def save(self):
+        self.excerpt = self.content[:100]
+        self.slug = slugify(self.title)
+        super(SchoolData, self).save()
+
+    def get_absolute_url(self): # < here
+        return reverse('news', args=[str(self.slug)])
+
+class SchoolImage(models.Model):
+    Image = models.ImageField(upload_to="school_data")
+    Data = models.ForeignKey(SchoolData, on_delete=models.CASCADE, related_name="image")
+
+class ImageInline(admin.TabularInline):
+    model = SchoolImage
+    show_change_link = True
+
+class SchoolDataAdmin(admin.ModelAdmin):
+    inlines = [
+        ImageInline
+    ]

@@ -1,0 +1,36 @@
+{% extends "SchoolApp/base.html" %}
+{%block content%}
+<section data-bs-version="5.1" class="people01 cid-tYogfb9DbG" id="people01-1r">
+    <div class="container">
+      <div class="row">
+  
+        <div class="">{% for Datas in Data%}
+          <div class="item features-without-image">
+            <div class="item-wrapper">
+              <div class="row align-items-center">
+                <div class="col-md-7">
+                  <div class="align-left">
+                    <h3 class="mbr-section-title mbr-fonts-style mb-2 display-5"><strong>{{Datas.title}}</strong></h3>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style mb-3 display-7">
+                      {{Datas.excerpt}}
+                    </h4>
+                    <p class="mbr-section-text mbr-fonts-style mb-0 display-7">
+                      Full-time<br>
+                    </p>
+                  </div>
+                </div>
+  
+                <div class="col-md-5">
+                  <div class="mbr-section-btn align-right">
+                    <a class="btn btn-black display-7" href="{% url "news" Datas.slug %}"><strong>Read
+                        more</strong></a>
+                  </div>
+                </div>{%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+{%endblock%}
