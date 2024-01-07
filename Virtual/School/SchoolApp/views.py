@@ -7,8 +7,8 @@ from django import forms as FORM
 def home(request):
     Data = models.SchoolData.objects.all()
     DATA = Data.reverse()
-    Data1 = DATA[0]
-    Selected = DATA[1:4]
+    Data1 = DATA
+    Selected = DATA
     print(Selected)
     return render(request, 'SchoolApp/index.html', {"Data": Selected, "Data1": Data1})
 
@@ -42,10 +42,7 @@ def result(request):
         form.is_valid()
         print(form.cleaned_data)
         if form.is_valid():
-            print(True)
             result = form._clean(request.user)
-            print("result")
-            print(result)
             return render(request, 'SchoolApp/student_result.html', 
             {'student': request.user,
             'forms': forms.ResultForm,

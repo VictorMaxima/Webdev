@@ -20,11 +20,48 @@ def grade(a):
     else:
         return "A"
 # Create your models here.
+class Session(models.Model):
+    title = models.CharField(max_length=9)
+    current = models.BooleanField(default=False)
+    number = 0
+    class Meta:
+        ordering = ["-title"]
+    def __str__(self):
+        return self.title
+
+class Level(models.Model):
+    title = models.CharField(max_length=25)
+    Years_Of_Completion = models.IntegerField()
+    order_of_completion = models.IntegerField(default=0)
+    def __str__(self):
+        return self.title
+
 class Class(models.Model):
     name = models.CharField(max_length=9)
     year_of_graduation = models.IntegerField(default=2023)
+    section = models.ForeignKey(Level, on_delete=models.CASCADE)
+    level = models.IntegerField()
+    def current_class(self):
+        session = Session.objects.all().get(current=True)
+        year = int(session.title[5:])
+        num_of_years_left = self.year_of_graduation - year
+        print(num_of_years_left)
+        if num_of_years_left >= 0:
+            current_level = self.section.Years_Of_Completion - num_of_years_left 
+            self.level = current_level
+        else:
+            next_section = Level.objects.all().get(order_of_completion = (self.section.order_of_completion + 1))
+            self.year_of_graduation += next_section.Years_Of_Completion
+            self.section = next_section
+            self.level = 1
+        
+    
     def __str__(self):
-        return str(self.year_of_graduation)
+        return str(self.section) + " " + str(self.level)
+
+    def save(self, *args, **kwargs):
+        self.current_class()
+        super().save(*args, *kwargs)
     
 class Teacher(models.Model):
     pass
@@ -39,7 +76,7 @@ class Student(AbstractBaseUser):
     state_of_origin = models.CharField(max_length=32)
     backend = 'SchoolApp.forms.MyBackend'
     DateOfBirth = models.DateField(default=datetime.datetime.now)
-    Year_Of_Graduation = models.ForeignKey(Class, on_delete=models.CASCADE)
+    Class = models.ForeignKey(Class, on_delete=models.CASCADE)
     
 
     def __str__(self):
@@ -54,16 +91,16 @@ class Student(AbstractBaseUser):
         return True
     
     
-class Session(models.Model):
-    title = models.CharField(max_length=9)
-    current = models.BooleanField(default=False)
-    def __str__(self):
-        return self.title
+
+
 
 class Course(models.Model):
     title = models.CharField(max_length=32)
     def __str__(self):
         return self.title
+    
+    class Meta():
+        verbose_name = "Subject"
 class StudentResult(models.Model):
     TERMS = [
         ('FIRST TERM', 'FIRST TERM'),
@@ -72,8 +109,10 @@ class StudentResult(models.Model):
    ]
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name = "result")
     session = models.ForeignKey(Session, on_delete=models.CASCADE, blank=True)
+    section = models.ForeignKey(Level, on_delete=models.CASCADE,  default=1)
+    level = models.IntegerField(default=1)
     term = models.CharField(max_length=32, choices=TERMS)
-    average = models.IntegerField( default=100)
+    average = models.FloatField( default=100)
     Position = models.IntegerField( default=100)
     RemarkFromTeacher = models.CharField(default='', max_length=100)
     RemarkFromPrincipal = models.CharField(default = '', max_length=100)
@@ -82,19 +121,21 @@ class StudentResult(models.Model):
         return name
     
     def save(self):
-        a, b = 0, 0
-        for result in self.result.all():
-            a += result.TotalScore
-            b += 1
-        self.average = a/b
-        super().save()
+        if self.PrimaryKey:
+            a, b = 0,0
+            for result in self.result.all():
+                a += result.TotalScore
+                b += 1
+            self.average = a/b
+            
+        
 
 class Result(models.Model):
     #student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='result')
     AssessmentScore = models.IntegerField(default=0)
     ExamScore = models.IntegerField(default=0,)
     teacherInCharge = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="subject")
+    subject = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="_result")
     student_result = models.ForeignKey(StudentResult, on_delete=models.CASCADE, related_name="result")
     TotalScore = models.IntegerField(default=0,editable=False)
     Grade = models.CharField(default="", max_length=1, editable=False)
@@ -103,6 +144,10 @@ class Result(models.Model):
         print(self.TotalScore)
         self.Grade = grade(self.TotalScore)
         super().save()
+
+class ResultFile(models.Model):
+    subject = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="result_file")
+    Class = models.ForeignKey(Class, on_delete=models.CASCADE, related_name="result_file")
 
 
 

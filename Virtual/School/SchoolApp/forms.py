@@ -59,7 +59,12 @@ class ResultForm(forms.Form):
    ]
     SESSIONS = [
         ('2023/2024', '2023/2024'),
-        ('2024/2025', '2024/2025')
+        ('2024/2025', '2024/2025'),
+        ('2025/2026', '2025/2026'),
+        ('2026/2027', '2026/2027'),
+        ('2027/2028', '2027/2028'),
+        ('2028/2029', '2028/2029'),
+        ('2029/2030', '2029/2030')
     ]
     term = forms.ChoiceField(choices=TERMS, required=True)
     year = forms.ChoiceField(required=True, choices = SESSIONS)
