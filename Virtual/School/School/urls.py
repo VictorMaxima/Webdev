@@ -21,7 +21,9 @@ from SchoolApp import forms
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
-
+admin.site.site_title = "School admin"
+admin.site.site_header = "School Admin"
+admin.site.index_title= "School Admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('all_news/' ,sch_views.news_list, name='news_list'),

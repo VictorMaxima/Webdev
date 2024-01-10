@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ["victormaxima.pythonanywhere.com", "127.0.0.1"]
 # Application definition
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend', 'SchoolApp.forms.MyBackend']
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHEECKS = ["security.W019"]
 ROOT_URLCONF = 'School.urls'
 
 TEMPLATES = [
@@ -117,6 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = "media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -121,17 +121,17 @@ class StudentResult(models.Model):
         return name
     
     def save(self):
-        if self.PrimaryKey:
+        if self.pk:
             a, b = 0,0
             for result in self.result.all():
                 a += result.TotalScore
                 b += 1
             self.average = a/b
+        super().save()
             
         
 
 class Result(models.Model):
-    #student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='result')
     AssessmentScore = models.IntegerField(default=0)
     ExamScore = models.IntegerField(default=0,)
     teacherInCharge = models.ForeignKey(User, on_delete=models.CASCADE)
